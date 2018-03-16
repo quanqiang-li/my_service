@@ -2,9 +2,13 @@ package com.carl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,8 +22,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 //springboot在/static, /public, META-INF/resources, /resources等存放静态资源的目录
 @Controller
 @SpringBootApplication
-//@MapperScan(basePackages = "com.ixinnuo.financial.dao.mysql")
-//@EnableTransactionManagement
+@EnableTransactionManagement
+@ServletComponentScan("com.carl")
+@MapperScan("com.carl.mapper")  
 public class Application extends WebMvcConfigurerAdapter {
     /**
      * 工程程序入口
@@ -32,8 +37,8 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/")
     String home(HttpServletRequest request) {
-       //return "redirect:/swagger-ui.html";
-        return getRedirectUrl(request);
+       return "redirect:/swagger-ui.html";
+        //return getRedirectUrl(request);
     }
     
     /**

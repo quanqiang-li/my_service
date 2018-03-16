@@ -15,11 +15,11 @@ public enum Code {
 	/**
 	 * 失败
 	 */
-
+	ERROR(9999, "失败"),
 	/**
 	 * 未知错误
 	 */
-	UNKNOWN_ERROR(9999, "未知错误"),
+	UNKNOWN_ERROR(9000, "未知错误"),
 
 	/**
 	 * 参数为空
