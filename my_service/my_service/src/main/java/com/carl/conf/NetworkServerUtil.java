@@ -31,6 +31,7 @@ import org.apache.derby.drda.NetworkServerControl; //derby network server
 /**
  * Class for starting the Derby NetworkServer on a separate Thread. This class
  * provides methods to start, and shutdown the server
+ * 启动derby数据库的网络服务
  */
 
 public class NetworkServerUtil {
