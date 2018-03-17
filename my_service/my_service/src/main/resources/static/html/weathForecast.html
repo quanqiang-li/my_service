@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="天气,天气预报, weath, Forecast, weathForecast" />
+<meta name="description" content="免费的 天气预报查询。" />
+<title>天气预报</title>
+<script src="../js/arttemplate-web.js"></script>
+</head>
+<body>
+	<div>
+		地区：<input name="location" value="丛台,邯郸">
+		<button id="find">查询</button>
+	</div>
+	<div id="weathForecast"></div>
+	<script id="weathForecast_art" type="text/html">
+<h3>{{basic.location}}</h3>
+<ul>
+  {{each daily_forecast value i}} 
+  <li>{{if i==0}}今天{{else if i==1}}明天{{else if i==2}}后天{{/if}}{{value.date}} &nbsp;
+{{if value.cond_txt_d == value.cond_txt_n}}{{value.cond_txt_n}}&nbsp;&nbsp;&nbsp;{{/if}}
+{{if value.cond_txt_d != value.cond_txt_n}}{{value.cond_txt_d}}转{{value.cond_txt_n}}{{/if}}&nbsp;  
+{{value.wind_dir}}{{value.wind_sc}}级  &nbsp;  
+气温{{value.tmp_max}}℃~{{value.tmp_min}}℃
+</li>
+ {{/each}}
+</ul>
+</script>
+</body>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/weathForecast.js"></script>
+</html>
