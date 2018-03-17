@@ -7,10 +7,9 @@
 
 	<!-- 日志都输出到控制台 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+		<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 ,logger{length}输出日志的logger名,%msg：日志消息，%n是换行符 -->
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35}
-				-%msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-3level %logger{50}-%msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -19,7 +18,7 @@
 		<file>${LOG_HOME}/${APP_Name}.log</file>
 		<append>true</append>
 		<encoder>
-			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			<pattern>%-4relative [%thread] %-5level %logger{50} - %msg%n
 			</pattern>
 		</encoder>
 	</appender>
@@ -39,7 +38,7 @@
 			<maxFileSize>10MB</maxFileSize>
 		</triggeringPolicy>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} -
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-3level %logger{50} -
 				%msg%n</pattern>
 		</encoder>
 	</appender>

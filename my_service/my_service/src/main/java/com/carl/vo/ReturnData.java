@@ -31,6 +31,7 @@ public class ReturnData {
      * 给json序列化时使用
      */
     public ReturnData() {
+    	this.dataBody = new HashMap<String, Object>();
     }
 
     /**
@@ -44,6 +45,14 @@ public class ReturnData {
         this.errorCode = errorInfo.getCode();
         this.errorString = errorInfo.getMsg();
         // TODO: 这里需要从常亮中得到错误代码所对应的的错误信息，错误代码不存在，错误信息返回“未知错误”
+    }
+    /**
+     * 设置code
+     * @param errorInfo
+     */
+    public void setCode(Code errorInfo){
+    	 this.errorCode = errorInfo.getCode();
+         this.errorString = errorInfo.getMsg();
     }
 
     public int getErrorCode() {
