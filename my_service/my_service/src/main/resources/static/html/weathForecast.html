@@ -2,31 +2,69 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1 , 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no">
+<!-- 以上三项为bootstrap必须 -->
 <meta name="keywords" content="天气,天气预报, weath, Forecast, weathForecast" />
 <meta name="description" content="免费的 天气预报查询。" />
 <title>天气预报</title>
+<!-- Bootstrap -->
+<link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
 <script src="../js/arttemplate-web.js"></script>
+<script type="text/javascript">
+	//注册外部函数，暂时只能写在html文件内部
+	template.defaults.imports.substrBegin = function(data) {
+		return data.substring(5);
+	}
+</script>
 </head>
 <body>
-	<div>
-		地区：<input name="location" value="丛台,邯郸">
-		<button id="find">查询</button>
+
+	<div class="container">
+		<div class="row clearfix">
+			<p></p>
+			<div class="col-md-2 column"></div>
+			<div class="col-md-8 column">
+				<form role="form">
+					<div class="input-group">
+						<span class="input-group-addon">城市</span> <input type="text"
+							class="form-control" name="location" value="丛台,邯郸"> <span
+							id="find" class="input-group-addon btn-primary btn ">查询</span>
+					</div>
+				</form>
+				<p></p>
+				<div id="weathForecast"></div>
+
+				<script id="weathForecast_art" type="text/html">
+				<span class="glyphicon glyphicon-home"></span>{{basic.location}}
+				<div class="list-group">
+				{{each daily_forecast value i}} 
+					<a href="#" class="list-group-item active">{{if i==0}}今天{{else if i==1}}明天{{else if i==2}}后天{{/if}}{{value.date | substrBegin}} </a>
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading">
+						{{if value.cond_txt_d == value.cond_txt_n}}{{value.cond_txt_n}}{{/if}}
+						{{if value.cond_txt_d != value.cond_txt_n}}{{value.cond_txt_d}}转{{value.cond_txt_n}}{{/if}}</h4>
+						<p class="list-group-item-text">{{value.wind_dir}}{{value.wind_sc}}级</p>
+					</div>
+					<div class="list-group-item">
+						气温{{value.tmp_max}}℃~{{value.tmp_min}}℃
+					</div>
+				{{/each}}
+				</div>
+				</script>
+			</div>
+			<div class="col-md-2 column"></div>
+		</div>
 	</div>
-	<div id="weathForecast"></div>
-	<script id="weathForecast_art" type="text/html">
-<h3>{{basic.location}}</h3>
-<ul>
-  {{each daily_forecast value i}} 
-  <li>{{if i==0}}今天{{else if i==1}}明天{{else if i==2}}后天{{/if}}{{value.date}} &nbsp;
-{{if value.cond_txt_d == value.cond_txt_n}}{{value.cond_txt_n}}&nbsp;&nbsp;&nbsp;{{/if}}
-{{if value.cond_txt_d != value.cond_txt_n}}{{value.cond_txt_d}}转{{value.cond_txt_n}}{{/if}}&nbsp;  
-{{value.wind_dir}}{{value.wind_sc}}级  &nbsp;  
-气温{{value.tmp_max}}℃~{{value.tmp_min}}℃
-</li>
- {{/each}}
-</ul>
-</script>
 </body>
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../lib/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../js/weathForecast.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </html>
