@@ -12,11 +12,13 @@ $(document)
 					 * @returns
 					 */
 					function latestDays() {
-						var location = $("input[name='location']").val();
+						var location = $("#location").val();
 						if (location == "") {
 							$("#weathForecast").text("请输入地区名称");
 							return;
 						}
+						//出现滚动条
+						$("#bar-active").show();
 						// 是否命中sessionStorage
 						if (sessionStorageHit(location)) {
 							return;
@@ -49,9 +51,12 @@ $(document)
 									},
 									error : function(data) {
 										$("#weathForecast").text(data);
-										console.log(data);
+									},
+									complete:function(data){
+										//隐藏滚动条
+										$("#bar-active").hide();
 									}
-								})
+								});
 					}
 					/**
 					 * 是否命中sessionStorage
@@ -70,6 +75,8 @@ $(document)
 						// 渲染模版
 						var html = template('weathForecast_art',
 								weatherForecastDays);
+						//隐藏滚动条
+						$("#bar-active").hide();
 						$("#weathForecast").html(html);
 						return true;
 					}
@@ -83,5 +90,12 @@ $(document)
 					}
 
 					$("#find").bind("click", latestDays);
+					//回车事件，抬起按键触发
+					$(document).keyup(function(event){
+						  if(event.keyCode ==13){
+						    $("#find").trigger("click");
+						  }
+					});
+					
 
-				})
+				});

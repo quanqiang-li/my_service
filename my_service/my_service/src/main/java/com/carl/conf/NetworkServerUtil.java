@@ -45,7 +45,8 @@ public class NetworkServerUtil {
 		this.portNum = port;
 		this.pw = pw;
 		try {
-			serverControl = new NetworkServerControl(InetAddress.getByName("localhost"), portNum);
+			//启动本机的网络服务 不要写localhost，服务器多网卡ip的情况下，网络服务不一定能匹配上
+			serverControl = new NetworkServerControl(InetAddress.getByName("127.0.0.1"), portNum);
 			pw.println("Derby Network Server created");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -31,7 +31,8 @@ public class Application extends WebMvcConfigurerAdapter {
      * @param args 启动参数
      */
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        //SpringApplication.run(Application.class, args);
+    	System.out.println(7344%9);
     }
 
     @RequestMapping("/")

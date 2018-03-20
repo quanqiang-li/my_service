@@ -23,6 +23,10 @@
 		return data.substring(5);
 	}
 </script>
+<script type="text/javascript" src="../lib/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/weathForecast.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -31,15 +35,18 @@
 			<p></p>
 			<div class="col-md-2 column"></div>
 			<div class="col-md-8 column">
-				<form role="form">
 					<div class="input-group">
 						<span class="input-group-addon">城市</span> <input type="text"
-							class="form-control" name="location" value="丛台,邯郸"> <span
-							id="find" class="input-group-addon btn-primary btn ">查询</span>
+							class="form-control" id="location" name="location" value="丛台,邯郸" > 
+							<span id="find" class="input-group-addon btn-primary btn ">查询</span>
 					</div>
-				</form>
 				<p></p>
-				<div id="weathForecast"></div>
+				<div id="bar-active" class="progress progress-striped active" style="display: none;">
+						<div class="progress-bar progress-bar-success"
+							style="width: 100%;"><span class="sr-only">动态进度条</span></div>
+				</div>
+				<div id="weathForecast">
+				</div>
 
 				<script id="weathForecast_art" type="text/html">
 				<span class="glyphicon glyphicon-home"></span>{{basic.location}}
@@ -63,8 +70,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="../lib/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../js/weathForecast.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </html>
