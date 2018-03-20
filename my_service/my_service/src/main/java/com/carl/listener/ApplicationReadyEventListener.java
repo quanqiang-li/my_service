@@ -28,6 +28,8 @@ public class ApplicationReadyEventListener implements ApplicationListener<Applic
 			log.info("derby服务 准备启动....");
 			//启动derby的网络服务
 			NetworkServerUtil.main(null);
+			//给出时间，等待服务启动成功
+			Thread.sleep(1000*3);
 			//测试数据库实例
 			consumerService.count();
 			log.info("derby服务 启动成功....");
