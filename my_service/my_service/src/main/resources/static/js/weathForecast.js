@@ -21,8 +21,7 @@ $(document)
 						if (sessionStorageHit(location)) {
 							return;
 						}
-						$
-								.ajax({
+						$.ajax({
 									url : "/weathForecast/latestDays",
 									type : "get",
 									data : {
@@ -43,11 +42,10 @@ $(document)
 												'weathForecast_art',
 												weatherForecastDays);
 										$("#weathForecast").html(html);
-										// sessionStorage存储，只能是字符串
+										// sessionStorage存储，只能是字符串,当天
 										var weatherForecastStr = JSON
 												.stringify(weatherForecastDays);
-										sessionStorage.setItem("latestDays-"
-												+ location, weatherForecastStr);
+										sessionStorage.setItem("latestDays-" + location + "-" + getDay(), weatherForecastStr);
 									},
 									error : function(data) {
 										$("#weathForecast").text(data);
@@ -63,7 +61,7 @@ $(document)
 					 */
 					function sessionStorageHit(location) {
 						var weatherForecastStr = sessionStorage
-								.getItem("latestDays-" + location);
+								.getItem("latestDays-" + location + "-" + getDay());
 						if (weatherForecastStr == null) {
 							return false;
 						}
@@ -74,6 +72,14 @@ $(document)
 								weatherForecastDays);
 						$("#weathForecast").html(html);
 						return true;
+					}
+					
+					function getDay(){
+						var myDate = new Date();//获取系统当前时间
+						var month = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+						var date = myDate.getDate(); //获取当前日(1-31)
+						return month +"-" +date;
+						
 					}
 
 					$("#find").bind("click", latestDays);

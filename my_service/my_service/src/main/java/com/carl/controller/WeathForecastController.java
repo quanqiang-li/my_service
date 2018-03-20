@@ -64,6 +64,14 @@ public class WeathForecastController {
 			wfd = weatherForecastService.getWFD(location);
 			if("ok".equalsIgnoreCase(wfd.status)){
 				returnData.setCode(Code.OK);
+			}else if("sign error".equalsIgnoreCase(wfd.status)){
+				//签名错误，再调用一次，和风bug
+				wfd = weatherForecastService.getWFD(location);
+				if("ok".equalsIgnoreCase(wfd.status)){
+					returnData.setCode(Code.OK);
+				}else{
+					returnData.setCode(Code.ERROR);
+				}
 			}else{
 				returnData.setCode(Code.ERROR);
 			}
