@@ -1,6 +1,9 @@
 package com.carl.listener;
 
 
+import java.io.PrintWriter;
+import java.io.Writer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +30,10 @@ public class ApplicationReadyEventListener implements ApplicationListener<Applic
 		try {
 			log.info("derby服务 准备启动....");
 			//启动derby的网络服务
-			NetworkServerUtil.main(null);
-			//给出时间，等待服务启动成功
-			Thread.sleep(1000*3);
+			PrintWriter pw = new PrintWriter(System.out, true);
+			NetworkServerUtil util = new NetworkServerUtil(1527, pw);
+			//不要直接调用NetworkServerUtil的main方法启动，会新开线程，不保证在执行顺序
+			util.start();
 			//测试数据库实例
 			consumerService.count();
 			log.info("derby服务 启动成功....");

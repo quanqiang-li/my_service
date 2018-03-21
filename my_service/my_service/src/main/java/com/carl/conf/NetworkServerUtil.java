@@ -112,13 +112,14 @@ public class NetworkServerUtil {
 		util.start();
 		try {
 			//不开启跟踪
-			//util.trace(false);
-			//util.testForConnection();
-			//waitForExit();
+			util.trace(false);
+			util.testForConnection();
+			waitForExit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//util.shutdown();
 	}
+	
 
 }
