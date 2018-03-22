@@ -97,5 +97,63 @@ $(document)
 						  }
 					});
 					
+					
+					
+					/*跨域访问*/
+					
+					/**
+					 * 最新天气预报情况
+					 * 
+					 * @returns
+					 */
+					function latestDaysForOrigin() {
+						var location = $("#location").val();
+						if (location == "") {
+							$("#weathForecast").text("请输入地区名称");
+							return;
+						}
+						//出现滚动条
+						$("#bar-active").show();
+						// 是否命中sessionStorage
+						if (sessionStorageHit(location)) {
+							return;
+						}
+						$.ajax({
+									url : "http://172.16.16.33:8787/weathForecast/latestDaysForOrigin",
+									type : "get",
+									dataType:"jsonp",
+									jsonp:"callback",
+									data : {
+										"location" : location
+									},
+									cache : true,								
+									success : function(data) {
+										var weatherForecastDays = data.dataBody.weatherForecastDays;
+										// 异常直接结束
+										if (data.errorCode != 0) {
+											$("#weathForecast").text(
+													weatherForecastDays.status);
+											return;
+										}
+										// 渲染模版
+										var html = template(
+												'weathForecast_art',
+												weatherForecastDays);
+										$("#weathForecast").html(html);
+										// sessionStorage存储，只能是字符串,当天
+										var weatherForecastStr = JSON
+												.stringify(weatherForecastDays);
+										sessionStorage.setItem("latestDays-" + location + "-" + getDay(), weatherForecastStr);
+									},
+									error : function(data) {
+										$("#weathForecast").text(data);
+									},
+									complete:function(data){
+										//隐藏滚动条
+										$("#bar-active").hide();
+									}
+								});
+					}
+					
 
 				});
