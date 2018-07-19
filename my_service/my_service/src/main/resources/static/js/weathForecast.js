@@ -21,8 +21,10 @@ $(document)
 						$("#bar-active").show();
 						// 是否命中sessionStorage
 						if (sessionStorageHit(location)) {
+							console.log("从缓存获取数据");
 							return;
 						}
+						console.log("从服务端获取数据");
 						$.ajax({
 									url : "/weathForecast/latestDays",
 									type : "get",
